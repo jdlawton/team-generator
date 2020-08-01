@@ -1,0 +1,17 @@
+
+.banner {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+.card-header {
+    background-color: lightblue;
+}
+

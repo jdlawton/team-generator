@@ -2,7 +2,8 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const createPage = require('./src/createPage');
+const generateHTML = require('./src/generateHTML');
+const { writeToFile, copyStyle } = require('./utils/createPage');
 
 let employees = [];
 
@@ -89,7 +90,6 @@ const addIntern = () => {
 
 const displayMenu = () => {
     let done = false;
-    //while (!done) {
         inquirer.prompt(
             {
                 type: 'list',
@@ -131,15 +131,22 @@ const displayMenu = () => {
             
                 })
             } else {
-                done = true;
                 console.log('Finished building team');
-                console.log("========================================")
-                console.log('Logging the Employees Array');
-                console.log(employees);
+                //console.log("========================================")
+                //console.log('Logging the Employees Array');
+                //console.log(employees);
+                const pageHTML = generateHTML(employees);
+                //console.log(pageHTML);
+                writeToFile('./dist/index.html', pageHTML).then(writeResponse => {
+                    console.log(writeResponse.message);
+                    return copyStyle();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
             }
             
         });
-    //}
 }
 
 //start the application
