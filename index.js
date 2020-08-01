@@ -2,11 +2,12 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const createPage = require('./src/createPage');
 
 let employees = [];
 
-const promptManager = () => {
-    //console.log("Inside promptManager");
+const addManager = () => {
+    //console.log("Inside addManager");
 
     return inquirer.prompt([
         {
@@ -142,7 +143,7 @@ const displayMenu = () => {
 }
 
 //start the application
-promptManager().then(function(mgrInfo){
+addManager().then(function(mgrInfo){
     //console.log (mgrInfo);
     const manager = new Manager(mgrInfo.name, mgrInfo.id, mgrInfo.email, mgrInfo.officeNum);
     employees.push(manager);
