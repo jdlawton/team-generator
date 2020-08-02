@@ -11,6 +11,7 @@ const generateHTML = employees => {
         <title>Meet The Team</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="./style.css" />
+        <script src="https://kit.fontawesome.com/c1836db28e.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container">
@@ -19,11 +20,8 @@ const generateHTML = employees => {
                     <h1>My Team</h1>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center card-wrapper">
                 ${employees.map(createCard).join('')}
-
-                
-                
             </div>
         </div>
     </body>
@@ -36,40 +34,40 @@ const createCard = employee => {
     //console.log(employee);
     if (employee.getRole() === 'Manager'){
         return `
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                ${employee.getName()} <br> ${employee.getRole()}
+        <div class="card employee-card" style="width: 18rem;">
+            <div class="card-header manager">
+                <h2>${employee.getName()}<br><i class="fas fa-user-tie"></i> ${employee.getRole()}</h2>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${employee.getId()}</li>
-                <li class="list-group-item">Email: ${employee.getEmail()}</li>
-                <li class="list-group-item">Office Number: ${employee.getOfficeNumber()}</li>
+                <li class="list-group-item"><span class="label">ID:</span> ${employee.getId()}</li>
+                <li class="list-group-item"><span class="label">Email:</span> <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
+                <li class="list-group-item"><span class="label">Office Number:</span> ${employee.getOfficeNumber()}</li>
             </ul>
         </div>
         `;
     } else if (employee.getRole() === 'Engineer') {
         return `
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                ${employee.getName()} <br> ${employee.getRole()}
+        <div class="card employee-card" style="width: 18rem;">
+            <div class="card-header engineer">
+                <h2>${employee.getName()} <br><i class="fas fa-laptop-code"></i> ${employee.getRole()}</h2>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${employee.getId()}</li>
-                <li class="list-group-item">Email: ${employee.getEmail()}</li>
-                <li class="list-group-item">GitHub: ${employee.getGithub()}</li>
+                <li class="list-group-item"><span class="label">ID:</span> ${employee.getId()}</li>
+                <li class="list-group-item"><span class="label">Email:</span> <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
+                <li class="list-group-item"><span class="label">Github:</span> <a href="https://github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a></li>
             </ul>
         </div>
         `;
     } else if (employee.getRole() === 'Intern') {
         return `
-        <div class="card" style="width: 18rem;">
+        <div class="card employee-card" style="width: 18rem;">
             <div class="card-header">
-                ${employee.getName()} <br> ${employee.getRole()}
+                <h2>${employee.getName()} <br><i class="fas fa-book"></i> ${employee.getRole()}</h2>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${employee.getId()}</li>
-                <li class="list-group-item">Email: ${employee.getEmail()}</li>
-                <li class="list-group-item">School: ${employee.getSchool()}</li>
+                <li class="list-group-item"><span class="label">ID:</span> ${employee.getId()}</li>
+                <li class="list-group-item"><span class="label">Email:</span> <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
+                <li class="list-group-item"><span class="label">School:</span> ${employee.getSchool()}</li>
             </ul>
         </div>
         `;
