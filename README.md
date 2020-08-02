@@ -6,6 +6,9 @@
   ## Description
   This application is designed to generate a simple team roster HTML file which will display a team manager, and all of the engineers and interns assigned to that team. Each employee will have several pieces of information displayed for them, including an employee id, an email address, and an office number, Github username, and school (if applicable). Once the HTML is created, the employees' email address can be clicked on to send an email and the engineers' Github usernames can be clicked on to visit their Github profiles.
 
+  ## Walkthrough Video
+  https://drive.google.com/file/d/1HkbGD7m7T60O6bsX7x7_iaktEqKZukfN/view
+
   ## Table of Contents
   * [Description](#description)
   * [Installation](#installation)
@@ -29,7 +32,7 @@
     
 
   ## Tests
-  No test instructions
+  The testing I did while creating this application was done using jest and the tests can be found in the repo under the __tests__ directory.
 
   ## Questions
   If you have any questions about this project, you can email me at joe.lawton@outlook.com.
