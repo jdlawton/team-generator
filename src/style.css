@@ -1,3 +1,6 @@
+/* the style.css sheet is stored in the /src directory and copied to /dist when the app is run. I use Bootstrap for the layout and general styling
+and then this sheet applies any final changes. While there are no media queries here, using Bootstrap, the site looked responsive when I tested different
+resolutions in Chrome.*/
 
 body {
     background-color: lightgray;

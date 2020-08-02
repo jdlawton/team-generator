@@ -1,3 +1,4 @@
+//tests for the Intern class. tests object creation and each of the class methods.
 const Intern = require('../lib/Intern');
 
 test('creates an Intern object', () => {
@@ -15,7 +16,7 @@ test("gets an intern's school", () => {
     expect(intern.getSchool()).toEqual(intern.school);
 });
 
-test("gets an engineer's role", () => {
+test("gets an intern's role", () => {
     const intern = new Intern('Ryan', 888, 'ryan@dunder-mifflin.com', 'Scranton School of Business');
 
     expect(intern.getRole()).toEqual('Intern');

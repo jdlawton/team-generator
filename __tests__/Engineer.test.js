@@ -1,3 +1,4 @@
+//tests for the Engineer class. tests object creation and each of the class methods.
 const Engineer = require('../lib/Engineer');
 
 test('creates an Engineer object', () => {

@@ -1,4 +1,6 @@
-  
+//the createPage.js script is used for the writeToFile function and the copyStyle functions, essentially for the file manipulation. This code was copied from
+//my Ch 9 readme-generator challenge.  
+
 const fs = require('fs');
 
 // function to write HTML file, it checks to see if the "dist" directory exists and if not, creates it, then writes the HTML to that directory.
@@ -48,4 +50,3 @@ const copyStyle = () => {
 }
 
 module.exports = { writeToFile, copyStyle };
-//module.exports = writeToFile;

@@ -1,3 +1,4 @@
+//tests for the Manager class. tests object creation and each of the class methods.
 const Manager = require('../lib/Manager');
 
 test('creates a Manager object', () => {

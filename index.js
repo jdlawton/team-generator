@@ -1,3 +1,4 @@
+//All of the require statments for the various pieces teh application uses.
 const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
@@ -5,11 +6,15 @@ const Intern = require('./lib/Intern');
 const generateHTML = require('./src/generateHTML');
 const { writeToFile, copyStyle } = require('./utils/createPage');
 
+//employees is a global array that is used to store the employee objects as they are created.
 let employees = [];
 
+//this function adds the team manger object. it prompts the user for input and returns the provided answers.
+//**NOTE** - while i have input validation, validating input on a type: 'number' prompt was acting funny for me in testing. if invalid input is provided,
+//inquirer generates a NaN error that displays on the input prompt. you have to clear the error before you can enter valid input or the input will continue to be invalid.
+//you can't just backspace to clear the error, you have to use the up and down arrows on the keyboard to get rid of it. i'm not sure if this is something with inquirer or 
+//if it is due to the type of terminal i am using, but i couldn't find anything in inquirer's documentation or online that would indicate how to change this behavior.
 const addManager = () => {
-    //console.log("Inside addManager");
-
     return inquirer.prompt([
         {
             type: 'input',
@@ -66,8 +71,9 @@ const addManager = () => {
     ]);
 }
 
+//if the user chooses to add an engineer from the main menu, this function is called and the user is prompted with engineer appropriate questions.
+//see my NOTE in addManager regarding the validation on type: 'number' questions.
 const addEngineer = () => {
-    //console.log('inside addEngineer');
     return inquirer.prompt([
         {
             type: 'input',
@@ -125,8 +131,9 @@ const addEngineer = () => {
     
 }
 
+//if the user chooses to add an intern from the main menu, this function is called and the user is prompted with intern appropriate questions.
+//see my NOTE in addManager regarding the validation on type: 'number' questions.
 const addIntern = () => {
-    //console.log('inside addIntern');
     return inquirer.prompt([
         {
             type: 'input',
@@ -184,6 +191,9 @@ const addIntern = () => {
    
 }
 
+//this function is called to display the main menu where the user selects to add an engineer, add an intern, or finish. when a choice is made, the appropriate
+//function is called, the answers that are returned are then pushed to the employees array and then the displayMenu function is recursively called. if the finished
+//option is selected the app calls the function to generate the HTML and write the file.
 const displayMenu = () => {
     let done = false;
         inquirer.prompt(
@@ -194,47 +204,31 @@ const displayMenu = () => {
                 choices: ['Add an Engineer', 'Add an Intern', 'Finish Building My Team']
             }
         ).then(menuChoice => {
-            //console.log(menuChoice);
-            //console.log(menuChoice.choice);
         
             if(menuChoice.choice === 'Add an Engineer'){
-                //console.log('Calling addEngineer');
                 addEngineer()
                 .then(engInfo => {
                     const engineer = new Engineer(engInfo.name, engInfo.id, engInfo.email, engInfo.github);
                     employees.push(engineer);
-                    //console.log("logging the engineer object");
-                    //console.log(engineer);
-                    //console.log(employees);
-                    //console.log(employees[0]);
-                    //console.log(employees[1]);
                     displayMenu();
             
                 })
             } else if (menuChoice.choice === 'Add an Intern') {
-                //console.log('Calling addIntern');
                 addIntern()
                 .then(intInfo => {
                     const intern = new Intern(intInfo.name, intInfo.id, intInfo.email, intInfo.school);
                     employees.push(intern);
-                    //console.log("logging the intern object");
-                    //console.log(intern);
-                    //console.log("logging the employees array");
-                    //console.log(employees);
-                    //console.log(employees[0]);
-                    //console.log(employees[1]);
                     displayMenu();
             
                 })
             } else {
                 console.log('Finished building team');
-                //console.log("========================================")
-                //console.log('Logging the Employees Array');
-                //console.log(employees);
+                //call generateHTML and pass the employees array so the index.html page can be created.
                 const pageHTML = generateHTML(employees);
-                //console.log(pageHTML);
+                //write the index.html file using the HTML generated previously.
                 writeToFile('./dist/index.html', pageHTML).then(writeResponse => {
                     console.log(writeResponse.message);
+                    //copy the style.css sheet to the ./dist directory
                     return copyStyle();
                 })
                 .catch(err => {
@@ -247,10 +241,9 @@ const displayMenu = () => {
 
 //start the application
 addManager().then(function(mgrInfo){
-    //console.log (mgrInfo);
     const manager = new Manager(mgrInfo.name, mgrInfo.id, mgrInfo.email, mgrInfo.officeNum);
     employees.push(manager);
-    //console.log("logging the manager object");
-    //console.log(manager);
     displayMenu();
-})
+}).catch(err => {
+    console.log(err);
+});

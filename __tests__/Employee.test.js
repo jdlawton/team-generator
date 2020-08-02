@@ -1,3 +1,4 @@
+//testing information for Employee class, which isn't used directly, but is inherited by several other classes in the app.
 const Employee = require('../lib/Employee');
 
 test('creates an Employee object', () => {
